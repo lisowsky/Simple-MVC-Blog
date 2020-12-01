@@ -12,5 +12,7 @@
     <li><a href="<?php echo $this->generateUrl('category/index'); ?>">Lista kategorii</a></li>
     <li><a href="<?php echo $this->generateUrl('article/add'); ?>">Dodaj artykuł</a>
     <li><a href="<?php echo $this->generateUrl('article/index'); ?>">Lista artykułów</a>
-    <li><a href="<?php echo $this->generateUrl('users/register'); ?>">Utwórz konto</a>
+    <li><a href="<?php echo $this->generateUrl('user/register'); ?>">Utwórz konto</a>
+    <li><a href="<?php echo $this->generateUrl('user/login'); ?>">Zaloguj</a>
+    <li><a href="<?php echo $this->generateUrl('user/logout'); ?>">Wyloguj</a>
 </ul>

@@ -75,12 +75,28 @@ $collection->add('article/index', new \BlogMVC\Engine\Router\Route(
         'class' => '\BlogMVC\Controller\Article'
     )
 ));
-$collection->add('users/register', new \BlogMVC\Engine\Router\Route(
+$collection->add('user/register', new \BlogMVC\Engine\Router\Route(
     HTTP_SERVER.'rejestracja',
     array(
-        'file' => DIR_COsNTROLLER.'Register.php',
+        'file' => DIR_CONTROLLER.'User.php',
         'method' => 'new',
-        'class' => '\BlogMVC\Controller\Register'
+        'class' => '\BlogMVC\Controller\User'
+    )
+));
+$collection->add('user/login', new \BlogMVC\Engine\Router\Route(
+    HTTP_SERVER.'logowanie',
+    array(
+        'file' => DIR_CONTROLLER.'User.php',
+        'method' => 'login',
+        'class' => '\BlogMVC\Controller\User'
+    )
+));
+$collection->add('user/logout', new \BlogMVC\Engine\Router\Route(
+    HTTP_SERVER.'wylogowano',
+    array(
+        'file' => DIR_CONTROLLER.'User.php',
+        'method' => 'logout',
+        'class' => '\BlogMVC\Controller\User'
     )
 ));
 $collection->add('homepage', new \BlogMVC\Engine\Router\Route(

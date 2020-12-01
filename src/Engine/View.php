@@ -5,6 +5,7 @@ namespace BlogMVC\Engine;
 /**
  * This class includes methods for views.
  */
+
 abstract class View{
 
     /**
