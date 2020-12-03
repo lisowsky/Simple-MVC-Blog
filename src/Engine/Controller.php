@@ -1,6 +1,8 @@
 <?php
 
 namespace BlogMVC\Engine;
+
+use BlogMVC\Helper\Auth;
 /**
  * This class includes methods for controllers.
  */
@@ -34,5 +36,15 @@ abstract class Controller
             return $route->geneRateUrl($data);
         }
         return false;
+    }
+
+    public function checkAuthorization() {
+        $user = Auth::getUser();
+
+        if ($user->id) {
+            return;
+        }
+
+        $this->redirect('/artykuly');
     }
 }

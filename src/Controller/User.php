@@ -1,6 +1,8 @@
 <?php
 namespace BlogMVC\Controller;
 
+use BlogMVC\Helper\Auth;
+use BlogMVC\Model\User as ModelUser;
 
 /**
  * Kontroler u¿ytkownika
@@ -8,6 +10,10 @@ namespace BlogMVC\Controller;
 
 class User extends \BlogMVC\Engine\Controller
 {
+
+     /**
+     * Dodaje u¿ytkownika
+     */
 	public function new()
     {
         $model = new \BlogMVC\Model\User();
@@ -23,17 +29,25 @@ class User extends \BlogMVC\Engine\Controller
 
     public function login()
     {
+        if (Auth::getUser()->id) {
+            $this->redirect('artykuly');
+        }
+
+        if (!empty($_POST)) {
+            $success = Auth::authorize($_POST['username'], $_POST['password']);
+
+            if ($success) {
+                $this->redirect('/artykuly');
+            }
+        }
         $view = new \BlogMVC\View\User();
         $view->renderHTML('login', 'front/user/');
     }
 
     public function logout()
     {
-        session_start();
-        session_unset();
-        session_destroy();
-        $view = new \BlogMVC\View\User();
-        $view->renderHTML('logout', 'front/user/');
+        Auth::logout();
+        $this->checkAuthorization();
     }
 
 
