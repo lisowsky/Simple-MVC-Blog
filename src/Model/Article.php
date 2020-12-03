@@ -2,6 +2,8 @@
 
 namespace BlogMVC\Model;
 
+use BlogMVC\Helper\Auth;
+
 /**
  * Model artykułów.
  */
@@ -45,12 +47,13 @@ class Article extends \BlogMVC\Engine\Model
      */
     public function insert($data) {
         $ins=$this->pdo->prepare('INSERT INTO articles (title, content, date_add, author, id_categories) VALUES (
-            :title, :content, :date_add, :author, :id_categories)');
+            :title, :content, :date_add, :author, :id_categories, :id_user)');
         $ins->bindValue(':title', $data['title'], \PDO::PARAM_STR);
         $ins->bindValue(':content', $data['content'], \PDO::PARAM_STR);
         $ins->bindValue(':date_add', $data['date_add'], \PDO::PARAM_STR);
         $ins->bindValue(':author', $data['author'], \PDO::PARAM_STR);
         $ins->bindValue(':id_categories', $data['cat'], \PDO::PARAM_INT);
+        $ins->bindValue(':id_user', Auth::getUser()->id, \PDO::PARAM_INT);
         $ins->execute();
     }
 
